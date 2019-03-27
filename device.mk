@@ -135,6 +135,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     netutils-wrapper-1.0
 
+# Overlays
+PRODUCT_PACKAGES += \
+    NotchBarKiller
+
 # Ramdisk
 PRODUCT_PACKAGES += \
     init.safailnet.rc
