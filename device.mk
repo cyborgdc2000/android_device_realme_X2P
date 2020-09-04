@@ -135,6 +135,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     netutils-wrapper-1.0
 
+# Ramdisk
+PRODUCT_PACKAGES += \
+    init.safailnet.rc
+
 # Sensors Hal
 PRODUCT_PACKAGES += \
     android.hardware.sensors@2.0-service.multihal.x2
