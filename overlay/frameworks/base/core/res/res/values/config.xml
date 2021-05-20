@@ -1206,4 +1206,7 @@
     <bool name="config_supportsInDisplayFingerprint">true</bool>
     <bool name="config_needCustomFODView">true</bool>
 
+    <!-- Screen off delay --> 
+    <integer name="config_screen_off_delay">0</integer>
+
 </resources>
