@@ -142,6 +142,10 @@ PRODUCT_PACKAGES += \
     RealmeX2WifiOverlay \
     DotKiller
 
+# Prebuilts
+PRODUCT_PACKAGES += \
+    OPScreenRecorder
+
 # Ramdisk
 PRODUCT_PACKAGES += \
     init.safailnet.rc
