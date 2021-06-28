@@ -82,6 +82,9 @@ ro.vendor.display.ad.sdr_calib_data=/vendor/etc/OPPO_OLED_AD_calib.cfg
 # Fingerprint
 ro.boot.realme.lockstate=0
 
+# Graphics
+debug.cpurend.vsync=false
+
 #lmkd options
 ro.config.low_ram=false
 ro.lmk.log_stats=true
