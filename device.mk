@@ -137,7 +137,8 @@ PRODUCT_PACKAGES += \
 
 # Overlays
 PRODUCT_PACKAGES += \
-    NotchBarKiller
+    NotchBarKiller \
+    RealmeX2WifiOverlay
 
 # Ramdisk
 PRODUCT_PACKAGES += \
