@@ -118,6 +118,12 @@ debug.sf.earlyGl.app.duration=21000000
 # Override Display Density
 ro.sf.lcd_density=438
 
+# Power Saving
+power.saving.mode=1
+pm.sleep_mode=1
+ro.vold.umsdirtyratio=20
+ro.ril.disable.power.collapse=0
+
 # Pre-rendering
 ro.vendor.perf.scroll_opt=true
 
