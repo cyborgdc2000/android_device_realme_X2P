@@ -11,3 +11,7 @@ endif
 # Override Display Density
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.sf.lcd_density=438
+
+# Use Vulkan backend for Skia UI rendering
+PRODUCT_PRODUCT_PROPERTIES += \
+    debug.hwui.renderer=skiavk
