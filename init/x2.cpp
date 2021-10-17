@@ -93,6 +93,9 @@ void vendor_load_properties() {
     string source_partitions[] = { "", "bootimage.", "odm.", "product.",
                                    "system.", "system_ext.", "vendor." };
 
+    // Disable apex updatable
+    property_override("ro.apex.updatable", "false");
+
     for (const string &source : source_partitions) {
         set_ro_build_prop(source, "device", device);
         set_ro_build_prop(source, "product", model, false);
