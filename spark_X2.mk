@@ -11,6 +11,7 @@ TARGET_BOOT_ANIMATION_RES := 1080
 
 # Inherit some common Spark stuff.
 $(call inherit-product, vendor/spark/config/common_full_phone.mk)
+EXTRA_UDFPS_ANIMATIONS := true
 
 # Device identifier. This must come after all inclusions.
 PRODUCT_NAME := spark_X2
