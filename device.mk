@@ -77,6 +77,11 @@ PRODUCT_PACKAGES += \
     libvulkan \
     vendor.display.config@2.0
 
+# Doze
+PRODUCT_PACKAGES += \
+    devicesettings \
+    RealmeDoze
+
 # Fingerprint
 PRODUCT_PACKAGES += \
     android.hardware.biometrics.fingerprint@2.3-service.x2
