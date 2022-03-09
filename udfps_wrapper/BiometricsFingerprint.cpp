@@ -26,8 +26,8 @@
 
 #define FOD_STATUS_PATH "/sys/kernel/oppo_display/notify_fppress"
 #define DIMLAYER_PATH "/sys/kernel/oppo_display/dimlayer_hbm"
-#define STATUS_ON "1"
-#define STATUS_OFF "0"
+#define STATUS_ON 1
+#define STATUS_OFF 0
 #define BIND(fn) [this](auto&&... args) -> decltype(auto) { return this->fn(std::forward<decltype(args)>(args)...); }
 
 namespace android {
@@ -37,11 +37,10 @@ namespace fingerprint {
 namespace V2_3 {
 namespace implementation {
 
-inline static void set(const std::string& path, const std::string& data) {
-    std::unique_ptr<FILE, decltype(&fclose)> stream(fopen(path.c_str(), "w"), &fclose);
-    if (stream) {
-        (void)write(fileno(stream.get()), data.c_str(), 1);
-    }
+template <typename T>
+static inline void set(const std::string& path, const T& value) {
+    std::ofstream file(path);
+    file << value;
 }
 
 BiometricsFingerprint::BiometricsFingerprint() : isEnrolling(false) {
@@ -186,14 +185,6 @@ void BiometricsFingerprint::setFingerprintScreenState(const bool on) {
         on ? vendor::oplus::hardware::biometrics::fingerprint::V2_1::FingerprintScreenState::FINGERPRINT_SCREEN_ON :
             vendor::oplus::hardware::biometrics::fingerprint::V2_1::FingerprintScreenState::FINGERPRINT_SCREEN_OFF
         );
-    if ((!isEnrolling)&&on){
-            std::thread([this]() {
-            std::this_thread::sleep_for(std::chrono::milliseconds(380));//turn display off before enabling dimlayer
-            if (!isEnrolling) {
-                set(DIMLAYER_PATH, STATUS_ON);
-            }
-        }).detach();
-    } else
     set(DIMLAYER_PATH, on ? STATUS_ON: STATUS_OFF);
 }
 
