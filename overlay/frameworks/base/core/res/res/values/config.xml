@@ -120,7 +120,7 @@
 
     <!-- Minimum screen brightness setting allowed by the power manager.
          The user is forbidden from setting the brightness below this level. -->
-    <integer name="config_screenBrightnessSettingMinimum">2</integer>
+    <integer name="config_screenBrightnessSettingMinimum">1</integer>
 
     <!-- Default screen brightness setting.
          Must be in the range specified by minimum and maximum. -->
@@ -684,20 +684,25 @@
                 <string ...>M -5,0 L -5,10 L 5,10 L 5,0 Z @dp</string>
          @see https://www.w3.org/TR/SVG/paths.html#PathData
          -->
-    <string name="config_mainBuiltInDisplayCutout">M -143,0 L -143,76 L 143,76 L 143,0 Z</string>
+    <string translatable="false" name="config_mainBuiltInDisplayCutout">
+        M -200,0
+        C -15,0,-60,68,0,68
+        C 60,68,15,0,200,0
+        Z
+    </string>
 
-    <!-- Height of the status bar -->
-    <dimen name="status_bar_height_portrait">77px</dimen>
-
-    <!-- Height of the status bar in landscape -->
-    <dimen name="status_bar_height_landscape">28dp</dimen>
-
-    <!-- Radius of the software rounded corners. -->
-    <dimen name="rounded_corner_radius">116px</dimen>
-
-    <!-- Radius of the software rounded corners at the bottom of the display in its natural
-        orientation. If zero, the value of rounded_corner_radius is used. -->
-    <dimen name="rounded_corner_radius_bottom">113px</dimen>
+    <!-- Like config_mainBuiltInDisplayCutout, but this path is used to report the
+         one single bounding rect per device edge to the app via
+         {@link DisplayCutout#getBoundingRect}. Note that this path should try to match the visual
+         appearance of the cutout as much as possible, and may be smaller than
+         config_mainBuiltInDisplayCutout -->
+    <string translatable="false" name="config_mainBuiltInDisplayCutoutRectApproximation">
+        M -52,0
+        V 30
+        A 52 52 180 0 0 52,30
+        V 0
+        Z
+    </string>
 
     <bool name="config_fillMainBuiltInDisplayCutout">true</bool>
 
@@ -924,7 +929,7 @@
 
   <!-- Delay that allows some content to arrive at the display before switching
          from DOZE to ON, in millis. -->
-    <integer name="config_wakeUpDelayDoze">32</integer>
+    <integer name="config_wakeUpDelayDoze">95</integer>
 
     <!-- Power Management: Specifies whether to decouple the auto-suspend state of the
          device from the display on/off state.
@@ -1188,27 +1193,6 @@
         <item>0:2:15</item>
     </string-array>
 
-    <!-- The list of vendor package signatures that should also be considered
-        platform signatures, specifically for use on devices with a vendor partition. -->
-    <string-array name="config_vendorPlatformSignatures">
-        <item>308203ef308202d7a003020102020900b0752d29db727005300d06092a864886f70d010105050030818d310b300906035504061302434e3112301006035504080c094775616e67446f6e673116301406035504070c0d5368656e5a68656e20566965773110300e060355040a0c07416e64726f69643110300e060355040b0c07416e64726f69643110300e06035504030c07416e64726f6964311c301a06092a864886f70d010901160d6f70706f406f70706f2e636f6d301e170d3139303431353132313333305a170d3436303833313132313333305a30818d310b300906035504061302434e3112301006035504080c094775616e67446f6e673116301406035504070c0d5368656e5a68656e20566965773110300e060355040a0c07416e64726f69643110300e060355040b0c07416e64726f69643110300e06035504030c07416e64726f6964311c301a06092a864886f70d010901160d6f70706f406f70706f2e636f6d30820122300d06092a864886f70d01010105000382010f003082010a0282010100d922013d82182f295a1b978385712fa30a85454e86e1d0e85aeaab63b4d9b726c1bc17dda5f96cb7f3a350413551f0bd62e2f315dc4cba24b519e6bf2d6622434105ed3e5e1dc779d1092c84b2e0bd250bf0b02410902afbd201b5adfa3f4daf3372e51dca3844f9157b12eadbe41755b9707f2615ac6afa9385131e5c5a153d3427bbb4de38bee7aa8f7e80545d6531359d7f75f213a77d00b3bec223eed82b1993a2c0b3cb1c6e847a13ae844075c0504b5cc73cd51be89c7fff272d002d0f3a040375ea405a65abcd8cde726cd50abfc483142f4e14fc1d1e40443122f2a59031d7f6cf15fcbb9b08cdacff935435458cdd212923521ddba892efada7943b0203010001a350304e301d0603551d0e04160414ac456f3dd64cf7de51e45333c1317858eed8177e301f0603551d23041830168014ac456f3dd64cf7de51e45333c1317858eed8177e300c0603551d13040530030101ff300d06092a864886f70d0101050500038201010062f9144ed0396b50c8569676c2410ec33395adc028cb9fe343a3ac9f1176ca92a429f504416639e667053a63b21a10c0a3b8713d782c931f07a278fe1a295660a334640eeb11aa8e67aa93c0454d1c4a737c888d1abeaa7fb1d2dae4a55e98cd70fa299dfc23f60bffb4f03e062fc65a75246ae7cc911530a4d3e837cf53bb09aa07883b2a06ac3a70b8a3ed7d927d4843d2b3c435f2074a0649b14d4714b8fe0670f592eb72aece03bddb69ee9c88d806326678370f8ffc02358edd4b491482451673230660dbd97ddd65d7174a30650bbcd8d5489bd4046440e7dc882f5dfe57fd19020a4f7cc68524e592c908c11df12037426e2332859d5eb7f9e6d9ddd2</item>
-    </string-array>
-
-     <!-- The properties of a UDFPS sensor in pixels, in the order listed below: -->
-     <integer-array name="config_udfps_sensor_props" translatable="false" >
-      <!--
-        <item>sensorLocationX</item>
-        <item>sensorLocationY</item>
-        <item>sensorRadius</item>
-      -->
-        <item>540</item>
-        <item>2066</item>
-        <item>96</item>
-     </integer-array>
-
-     <!-- How long it takes for the HW to start illuminating after the illumination is requested. -->
-    <integer name="config_udfps_illumination_transition_ms">0</integer>
-
     <!-- Whether device has VOOC charging support -->
     <bool name="config_hasVoocCharger">true</bool>
 
@@ -1222,8 +1206,33 @@
     <!-- Screen off delay --> 
     <integer name="config_screen_off_delay">0</integer>
 
-    <!-- Enable Zram writeback feature to allow unused pages in zram be written to flash. -->
+    <!-- The list of vendor package signatures that should also be considered
+        platform signatures, specifically for use on devices with a vendor partition. -->
+    <string-array name="config_vendorPlatformSignatures">
+        <item>308203ef308202d7a003020102020900b0752d29db727005300d06092a864886f70d010105050030818d310b300906035504061302434e3112301006035504080c094775616e67446f6e673116301406035504070c0d5368656e5a68656e20566965773110300e060355040a0c07416e64726f69643110300e060355040b0c07416e64726f69643110300e06035504030c07416e64726f6964311c301a06092a864886f70d010901160d6f70706f406f70706f2e636f6d301e170d3139303431353132313333305a170d3436303833313132313333305a30818d310b300906035504061302434e3112301006035504080c094775616e67446f6e673116301406035504070c0d5368656e5a68656e20566965773110300e060355040a0c07416e64726f69643110300e060355040b0c07416e64726f69643110300e06035504030c07416e64726f6964311c301a06092a864886f70d010901160d6f70706f406f70706f2e636f6d30820122300d06092a864886f70d01010105000382010f003082010a0282010100d922013d82182f295a1b978385712fa30a85454e86e1d0e85aeaab63b4d9b726c1bc17dda5f96cb7f3a350413551f0bd62e2f315dc4cba24b519e6bf2d6622434105ed3e5e1dc779d1092c84b2e0bd250bf0b02410902afbd201b5adfa3f4daf3372e51dca3844f9157b12eadbe41755b9707f2615ac6afa9385131e5c5a153d3427bbb4de38bee7aa8f7e80545d6531359d7f75f213a77d00b3bec223eed82b1993a2c0b3cb1c6e847a13ae844075c0504b5cc73cd51be89c7fff272d002d0f3a040375ea405a65abcd8cde726cd50abfc483142f4e14fc1d1e40443122f2a59031d7f6cf15fcbb9b08cdacff935435458cdd212923521ddba892efada7943b0203010001a350304e301d0603551d0e04160414ac456f3dd64cf7de51e45333c1317858eed8177e301f0603551d23041830168014ac456f3dd64cf7de51e45333c1317858eed8177e300c0603551d13040530030101ff300d06092a864886f70d0101050500038201010062f9144ed0396b50c8569676c2410ec33395adc028cb9fe343a3ac9f1176ca92a429f504416639e667053a63b21a10c0a3b8713d782c931f07a278fe1a295660a334640eeb11aa8e67aa93c0454d1c4a737c888d1abeaa7fb1d2dae4a55e98cd70fa299dfc23f60bffb4f03e062fc65a75246ae7cc911530a4d3e837cf53bb09aa07883b2a06ac3a70b8a3ed7d927d4843d2b3c435f2074a0649b14d4714b8fe0670f592eb72aece03bddb69ee9c88d806326678370f8ffc02358edd4b491482451673230660dbd97ddd65d7174a30650bbcd8d5489bd4046440e7dc882f5dfe57fd19020a4f7cc68524e592c908c11df12037426e2332859d5eb7f9e6d9ddd2</item>
+    </string-array>
+
+    <!-- Amount of time in ms the user needs to press the relevant keys to trigger the
+         screenshot chord -->
+    <integer name="config_screenshotChordKeyTimeout">0</integer>
+
+     <!-- Enable Zram writeback feature to allow unused pages in zram be written to flash. -->
     <bool name="config_zramWriteback">true</bool>
+
+     <!-- The properties of a UDFPS sensor in pixels, in the order listed below: -->
+     <integer-array name="config_udfps_sensor_props" translatable="false" >
+      <!--
+        <item>sensorLocationX</item>
+        <item>sensorLocationY</item>
+        <item>sensorRadius</item>
+      -->
+        <item>540</item>
+        <item>2154</item>
+        <item>96</item>
+     </integer-array>
+
+     <!-- How long it takes for the HW to start illuminating after the illumination is requested. -->
+    <integer name="config_udfps_illumination_transition_ms">0</integer>
 
     <!-- Flag indicating whether the surface flinger has limited
          alpha compositing functionality in hardware.  If set, the window
@@ -1236,7 +1245,20 @@
          fading edges is prohibitively expensive on most GPUs. -->
     <bool name="config_ui_enableFadingMarquee">true</bool>
 
-    <!-- If true, enable the advance anti-falsing classifier on the lockscreen. On some devices it
+     <!-- Night display color temperature calibration -->
+     <string-array name="config_nightDisplayColorTemperatureCoefficients">
+        <!-- R a-coefficient --> <item>0.0</item>
+        <!-- R b-coefficient --> <item>0.0</item>
+        <!-- R y-intercept --> <item>1.0</item>
+        <!-- G a-coefficient --> <item>-0.000000014365268757</item>
+        <!-- G b-coefficient --> <item>0.000255092801250106</item>
+        <!-- G y-intercept --> <item>-0.064156942434907716</item>
+        <!-- B a-coefficient --> <item>-0.000000000910931179</item>
+        <!-- B b-coefficient --> <item>0.000207598323269139</item>
+        <!-- B y-intercept --> <item>-0.349361641294833436</item>
+    </string-array>
+
+     <!-- If true, enable the advance anti-falsing classifier on the lockscreen. On some devices it
           does not work well, particularly with noisy touchscreens. Note that disabling it may
           increase the rate of unintentional unlocks. -->
     <bool name="config_lockscreenAntiFalsingClassifierEnabled">false</bool>

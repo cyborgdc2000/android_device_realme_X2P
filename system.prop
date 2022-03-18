@@ -1,18 +1,26 @@
+
+# Art
+dalvik.vm.dex2oat64.enabled=true
+dalvik.vm.boot-dex2oat-cpu-set=0,1,2,3,4,5,6,7
+dalvik.vm.boot-dex2oat-threads=8
+dalvik.vm.dex2oat-cpu-set=0,1,2,3,4,5,6,7
+dalvik.vm.dex2oat-filter=everything
+dalvik.vm.dex2oat-threads=8
+dalvik.vm.image-dex2oat-cpu-set=0,1,2,3,4,5,6,7
+dalvik.vm.image-dex2oat-filter=everything
+dalvik.vm.image-dex2oat-threads=8
+
 # Audio
 ro.config.media_vol_steps=25
 ro.config.vc_call_vol_steps=7
-ro.qc.sdk.audio.fluencetype=none
-persist.audio.fluence.voicecall=true
-persist.audio.fluence.voicerec=true
-persist.audio.fluence.speaker=true
 
 # Bluetooth
 vendor.bluetooth.soc=cherokee
-vendor.audio.feature.a2dp_offload.enable=false
-persist.bluetooth.a2dp_offload.disabled=true
-persist.vendor.qcom.bluetooth.enable.splita2dp=false
-ro.bluetooth.a2dp_offload.supported=false
-persist.bluetooth.bluetooth_audio_hal.disabled=true
+persist.vendor.bt.a2dp.aac_whitelist=false
+persist.vendor.btstack.enable.splita2dp=true
+persist.vendor.btstack.enable.twsplus=true
+persist.vendor.btstack.enable.twsplussho=true
+ro.bluetooth.library_name=libbluetooth_qti.so
 persist.bluetooth.bqr.event_mask=0x8000000E
 persist.bluetooth.bqr.min_interval_ms=60000
 persist.bluetooth.bqr.choppy_threshold=9,6
@@ -26,192 +34,119 @@ persist.vendor.bluetooth.modem_nv_support=true
 persist.vendor.service.bdroid.soc.alwayson=true
 persist.vendor.service.bt.iotinfo.report.enable=true
 
-# Bionic
-ro.bionic.cpu_variant=cortex-a76
-ro.bionic.2nd_cpu_variant=cortex-a76
-
-# Blurs
-ro.sf.blurs_are_expensive=1
-ro.surface_flinger.supports_background_blur=1
-ro.launcher.blur.appLaunch=0
-
 # Camera
-persist.vendor.camera.light_ae.enable=1
-vendor.camera.aux.packagelist=org.codeaurora.snapcam,com.android.camera,org.lineageos.snap
 ro.camera.hfr.enable=1
 ro.camera.relight.enable=0
 ro.camera.attr.detect.enable=1
+ro.camera.notify_nfc=1
 ro.camera.temperature.limit=470
-
-# CNE
-persist.vendor.cne.feature=1
+persist.vendor.camera.light_ae.enable=1
+vendor.camera.aux.packagelist=org.codeaurora.snapcam,com.android.camera,org.lineageos.snap
 
 # Charger
-ro.charger.enable_suspend=1
+ro.charger.enable_suspend=true
 
 # Data modules
-persist.data.netmgrd.qos.enable=true
 persist.vendor.data.profile_update=true
 persist.vendor.data.mode=concurrent
-ro.vendor.use_data_netmgrd=true
 
-# FUSE
-persist.sys.fuse.passthrough.enable=true
+# Fingerprint
+vendor.flash.locked=0
 
-# Dex
-dalvik.vm.dex2oat64.enabled=true
-pm.dexopt.first-boot=quicken
-pm.dexopt.bg-dexopt=everything
-
-# Dalvik CPU
-dalvik.vm.isa.arm.variant=cortex-a76
-dalvik.vm.isa.arm64.variant=cortex-a76
-
-# Display post-processing
-debug.egl.hw=0
-debug.sf.hw=0
+# Graphics
 debug.sf.enable_hwc_vds=1
+debug.sf.early.sf.duration=16000000
+debug.sf.early.app.duration=16500000
+debug.sf.earlyGl.sf.duration=13500000
+debug.sf.earlyGl.app.duration=21000000
+debug.sf.late.sf.duration=10500000
+debug.sf.late.app.duration=20500000
 debug.sf.latch_unsignaled=1
-debug.sf.disable_backpressure=1
-ro.surface_flinger.protected_contents=true
-ro.surface_flinger.has_wide_color_display=true
-ro.surface_flinger.has_HDR_display=true
-ro.surface_flinger.use_color_management=true
-ro.surface_flinger.wcg_composition_dataspace=143261696
-ro.surface_flinger.force_hwc_copy_for_virtual_displays=true
-ro.surface_flinger.max_frame_buffer_acquired_buffers=3
-ro.vendor.display.ad=1
+debug.sf.use_phase_offsets_as_durations=1
+dev.pm.dyn_samplingrate=1
+persist.front.skipdisplay.enable=1
 ro.vendor.display.sensortype=2
 ro.vendor.display.ad.sdr_calib_data=/vendor/etc/OPPO_OLED_AD_calib.cfg
 
-# Fingerprint
-ro.boot.realme.lockstate=0
+# IOP
+vendor.iop.enable_prefetch_ofr=0
+vendor.iop.enable_uxe=0
 
-# Graphics
-debug.cpurend.vsync=false
-
-#lmkd options
-ro.config.low_ram=false
-ro.lmk.log_stats=true
-
-# Iorap
-iorapd.perfetto.enable=true
-persist.device_config.runtime_native_boot.iorap_readahead_enable=true
-ro.iorapd.enable=true
+# IWLAN
+persist.data.iwlan.enable=true
+persist.data.iwlan.rekey=4294967295
 
 # Media
-media.settings.xml=/system/etc/media_profiles_vendor.xml
+media.settings.xml=/vendor/etc/media_profiles_vendor.xml
 media.stagefright.thumbnail.prefer_hw_codecs=true
 persist.mm.enable.prefetch=true
 ro.media.recorder-max-base-layer-fps=60
+vendor.media.vpp.enable=true
 
 # Memory optimizations
 ro.vendor.qti.sys.fw.bservice_enable=true
 
+# Mock
+persist.sys.force_sw_gles=1
+
 # Netflix custom property
-ro.netflix.bsp_rev=Q6150-17263-1
+ro.netflix.bsp_rev=Q855-16947-1
 
-# Offsets
-debug.sf.use_phase_offsets_as_durations=1
-debug.sf.late.sf.duration=10500000
-debug.sf.late.app.duration=20500000
-debug.sf.early.sf.duration=21000000
-debug.sf.early.app.duration=16500000
-debug.sf.earlyGl.sf.duration=13500000
-debug.sf.earlyGl.app.duration=21000000
-
-# Override Display Density
-ro.sf.lcd_density=438
-
-# Power Saving
-power.saving.mode=1
-pm.sleep_mode=1
-ro.vold.umsdirtyratio=20
-ro.ril.disable.power.collapse=0
-
-# Pre-rendering
-ro.vendor.perf.scroll_opt=true
+# NFC
+ro.nfc.port=I2C
 
 # RCS and IMS
 persist.dbg.ims_volte_enable=1
+persist.dbg.wfc_avail_ovr=1
 persist.dbg.volte_avail_ovr=1
 persist.dbg.vt_avail_ovr=1
-persist.dbg.wfc_avail_ovr=1
-persist.rcs.supported=0
+persist.rcs.supported=1
 persist.vendor.ims.disableQXDMLogs=0
 persist.vendor.ims.disableADBLogs=0
 persist.vendor.ims.disableDebugLogs=0
 persist.vendor.ims.disableIMSLogs=0
 persist.vendor.ims.rtp.enableqxdm=3
 persist.vendor.ims.vt.enableadb=3
-
-# One handed mode
-ro.support_one_handed_mode=true
+persit.radio.VT_LOG_LEVEL=255
+persist.vendor.ims.loglevel=255
 
 # RIL
-DEVICE_PROVISIONED=1
-persist.sys.fflag.override.settings_network_and_internet_v2=true
 persist.radio.hvolte.enable=1
+persist.radio.custom_exp_ecc=1
 persist.vendor.radio.atfwd.start=true
+persist.vendor.radio.data_con_rprt=1
 persist.vendor.radio.lte_vrte_ltd=1
 persist.vendor.radio.cs_srv_type=1
+persist.vendor.radio.process_sups_ind=1
 persist.vendor.radio.rat_on=combine
 ril.subscription.types=NV,RUIM
-persist.radio.add_power_save=1
-persist.radio.multisim.config=dsds
-persist.radio.custom_exp_ecc=1
-persist.vendor.radio.process_sups_ind=1
-persist.vendor.radio.data_con_rprt=1
-persist.data.iwlan.enable=true
-persist.data.iwlan.rekey=4294967295
-ro.telephony.default_network=22,20
+ro.telephony.default_network=22,22
 telephony.lteOnCdmaDevice=1
-persist.sys.fflag.override.settings_provider_model=false
+
+# Rmnet data
+persist.rmnet.data.enable=true
+persist.data.wda.enable=true
+persist.data.df.dl_mode=5
+persist.data.df.ul_mode=5
+persist.data.df.agg.dl_pkt=10
+persist.data.df.agg.dl_size=4096
+persist.data.df.mux_count=8
+persist.data.df.iwlan_mux=9
+persist.data.df.dev_name=rmnet_usb0
 
 # Sensors
 persist.vendor.sensors.enable.mag_filter=true
-ro.display.underscreen.lightsensor.support=1
-ro.lcd.display.screen.underlightsensor.region=624,28,672,76
-persist.sys.oppo.fusionlight=true
-persist.sys.oppo.proximity=true
 ro.qti.sensors.wu=false
-ro.support_one_handed_mode=true
-
-# Rescue Party
-persist.sys.disable_rescue=true
-
-# Priv-app
-ro.control_privapp_permissions=log
-
-# System Server
-arm64.memtag.process.system_server=off
 
 # SSR
 persist.vendor.ssr.enable_ramdumps=0
 persist.vendor.ssr.restart_level=ALL_ENABLE
 
-# Tweak the memory management of the device, enable more background apps.. etc..
-ro.config.fha_enable=true  
-ro.sys.fw.bg_apps_limit=32  
-ro.config.dha_cached_max=16  
-ro.config.dha_empty_max=42  
-ro.config.dha_empty_init=32  
-ro.config.dha_lmk_scale=0.545  
-ro.config.dha_th_rate=2.3  
-ro.config.sdha_apps_bg_max=64  
-ro.config.sdha_apps_bg_min=8
+# Storage
+persist.sys.binary_xml=false
 
-# Zram
-ro.zram.mark_idle_delay_mins=60
-ro.zram.first_wb_delay_mins=1440
-ro.zram.periodic_wb_delay_hours=24
+# Time
+persist.vendor.delta_time.enable=true
 
-# Gboard
-ro.com.google.ime.kb_pad_port_b=1
-ro.com.google.ime.kb_pad_port_l=7
-ro.com.google.ime.kb_pad_port_r=7
-ro.com.google.ime.kb_pad_land_l=14
-ro.com.google.ime.kb_pad_land_r=14
-
-# QTI VA
-ro.vendor.qti.va_aosp.support=1
+# WiFi
+config.disable_rtt=true

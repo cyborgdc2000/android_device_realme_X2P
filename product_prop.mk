@@ -4,9 +4,18 @@ ifeq ($(TARGET_BUILD_VARIANT),eng)
 # Get rid of that by overriding it in /product on eng builds
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.secure=0 \
-    ro.adb.secure=0 \
-    persist.sys.usb.config=adb
+    ro.adb.secure=0
 endif
+
+# Disable Rescue Party on userdebug & eng build
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
+PRODUCT_PRODUCT_PROPERTIES += \
+    persist.sys.disable_rescue=true
+endif
+
+# Priv-app permission
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.control_privapp_permissions=log
 
 # Override Display Density
 PRODUCT_PRODUCT_PROPERTIES += \

@@ -10,7 +10,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_p.mk)
 
 # Get non-open-source specific aspects
-$(call inherit-product, vendor/realme/X2/X2-vendor.mk)
+$(call inherit-product, vendor/realme/RMX1931/RMX1931-vendor.mk)
 
 # VNDK
 PRODUCT_TARGET_VNDK_VERSION := 30
@@ -32,6 +32,16 @@ DEVICE_PACKAGE_OVERLAYS += \
 -include $(LOCAL_PATH)/product_props.mk
 PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE := true
 
+# Screen density
+PRODUCT_AAPT_CONFIG := normal
+PRODUCT_AAPT_PREF_CONFIG := xxhdpi
+
+# Privapp Whitelist
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/privapp-permissions-RMX1931.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-RMX1931.xml \
+    $(LOCAL_PATH)/configs/privapp-permissions-RMX1931.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-RMX1931.xml \
+    $(LOCAL_PATH)/configs/privapp-permissions-RMX1931.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/privapp-permissions-RMX1931.xml
+
 # AID/fs configs
 PRODUCT_PACKAGES += \
     fs_config_files
@@ -41,13 +51,9 @@ PRODUCT_PACKAGES += \
     audio.a2dp.default \
     tinymix
 
-PRODUCT_COPY_FILES += \
-    frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration.xml:$(TARGET_COPY_OUT_PRODUCT)/vendor_overlay/$(PRODUCT_TARGET_VNDK_VERSION)/etc/a2dp_audio_policy_configuration.xml \
-    frameworks/av/services/audiopolicy/config/a2dp_in_audio_policy_configuration.xml:$(TARGET_COPY_OUT_PRODUCT)/vendor_overlay/$(PRODUCT_TARGET_VNDK_VERSION)/etc/a2dp_in_audio_policy_configuration.xml \
-    frameworks/av/services/audiopolicy/config/bluetooth_audio_policy_configuration.xml:$(TARGET_COPY_OUT_PRODUCT)/vendor_overlay/$(PRODUCT_TARGET_VNDK_VERSION)/etc/bluetooth_audio_policy_configuration.xml
-
 # Bluetooth
 PRODUCT_PACKAGES += \
+    BluetoothQti \
     libldacBT_bco
 
 # Camera
@@ -56,14 +62,18 @@ PRODUCT_PACKAGES += \
 
 # Common init scripts
 PRODUCT_PACKAGES += \
-    init.set_baseband.sh \
-    init.qcom.rc \
-    init.devicesetting.rc \
+    init.devicesetting.rc
+
+PRODUCT_PACKAGES += \
     fstab.qcom
 
-# Ramdisk shit
-PRODUCT_COPY_FILES += \
-    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/ramdisk/,$(TARGET_COPY_OUT_RAMDISK))
+# Dex
+PRODUCT_DEX_PREOPT_DEFAULT_COMPILER_FILTER := everything
+
+PRODUCT_DEXPREOPT_SPEED_APPS += \
+    Launcher3QuickStep \
+    Settings \
+    SystemUI
 
 # Dex/ART optimization
 PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD := false
@@ -83,12 +93,11 @@ PRODUCT_PACKAGES += \
 
 # Doze
 PRODUCT_PACKAGES += \
-    devicesettings \
-    RealmeDoze
+    RealmeProximityHelper \
 
 # Fingerprint
 PRODUCT_PACKAGES += \
-    android.hardware.biometrics.fingerprint@2.3-service.x2
+    android.hardware.biometrics.fingerprint@2.3-service.RMX1931
 
 # Fingerprint
 PRODUCT_COPY_FILES += \
@@ -101,18 +110,19 @@ PRODUCT_PACKAGES += \
     libhidltransport \
     libhwbinder
 
-# Vendor Overlay
+# Google Photos
 PRODUCT_COPY_FILES += \
-    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/vendor_overlay/,$(TARGET_COPY_OUT_PRODUCT)/vendor_overlay/$(PRODUCT_TARGET_VNDK_VERSION))
+    $(LOCAL_PATH)/configs/pixel_2016_exclusive.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/pixel_2016_exclusive.xml
 
-# Vulkan
+#Hardware
 PRODUCT_COPY_FILES += \
-     frameworks/native/data/etc/android.software.vulkan.deqp.level-2020-03-01.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/android.software.vulkan.deqp.level.xml
-
-# Hardware
-PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
     frameworks/native/data/etc/android.hardware.telephony.ims.xml:system/etc/permissions/android.hardware.telephony.ims.xml \
     frameworks/native/data/etc/android.software.controls.xml:system/etc/permissions/android.software.controls.xml
+
+# HotwordEnrollement app permissions
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/privapp-permissions-hotword.xml:system/etc/permissions/privapp-permissions-hotword.xml
 
 # IMS
 PRODUCT_PACKAGES += \
@@ -123,11 +133,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/keylayout/gpio-keys.kl:/system/usr/keylayout/gpio-keys.kl
 
-# Misc
-PRODUCT_PACKAGES += \
-    charger_res_images \
-    ThemePicker
-
 # NFC
 PRODUCT_PACKAGES += \
     com.android.nfc_extras \
@@ -136,32 +141,31 @@ PRODUCT_PACKAGES += \
     SecureElement \
     Tag
 
+
 # Net
 PRODUCT_PACKAGES += \
     netutils-wrapper-1.0
 
 # Overlays
 PRODUCT_PACKAGES += \
-    NotchBarKiller \
-    RealmeX2WifiOverlay \
-    DotKiller
+    RMX1931WifiOverlay \
 
-# Prebuilts
-PRODUCT_PACKAGES += \
-    OPScreenRecorder
+# QTI
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/qti_whitelist.xml:system/etc/sysconfig/qti_whitelist.xml \
+    $(LOCAL_PATH)/permissions/privapp-permissions-qti.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-qti.xml
 
 # Ramdisk
 PRODUCT_PACKAGES += \
     init.safailnet.rc
 
-# Sensors Hal
-PRODUCT_PACKAGES += \
-    android.hardware.sensors@2.0-service.multihal.x2
-
-# Sensors
+# Seccomp policy
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
-    frameworks/native/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml
+    $(LOCAL_PATH)/seccomp/mediacodec-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy \
+    $(LOCAL_PATH)/seccomp/mediaextractor-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediaextractor.policy
+
+# RealmeParts
+$(call inherit-product, packages/apps/RealmeParts/parts.mk)
 
 # Ril
 PRODUCT_PACKAGES += \
@@ -183,6 +187,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_BOOT_JARS += \
     telephony-ext
 
-# USB
+# TextClassifier
 PRODUCT_PACKAGES += \
-    android.hardware.usb@1.0-service.basic.x2
+    textclassifier.bundle1
+
+# RCS
+PRODUCT_PACKAGES += \
+    com.android.ims.rcsmanager \
+    PresencePolling \
+    RcsService
