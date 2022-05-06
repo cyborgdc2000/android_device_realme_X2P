@@ -16,8 +16,22 @@
 */
 -->
 <resources>
-    <dimen name="rounded_corner_content_padding">50px</dimen>
+    <!-- The padding on the side of the navigation bar. Must be greater than or equal to
+         navigation_extra_key_width -->
+    <dimen name="navigation_side_padding">85dp</dimen>
+
+    <dimen name="rounded_corner_content_padding">50.0px</dimen>
+
+    <dimen name="keyguard_carrier_text_margin">18dp</dimen>
 
     <!-- Bottom margin size when fingerprint in display is active -->
-    <dimen name="keyguard_indication_margin_bottom_fingerprint_in_display">150dp</dimen>
+     <dimen name="keyguard_indication_margin_bottom_fingerprint_in_display">25dp</dimen>
+
+    <!-- Location on the screen of the center of the physical power button. This is a reasonable
+    default that should be overridden by device-specific overlays. -->
+    <dimen name="physical_power_button_center_screen_location_y">885px</dimen>
+
+    <!-- UDFPS recognizing animation vertical position offset -->
+    <dimen name="udfps_animation_offset">8dp</dimen>
+
 </resources>
