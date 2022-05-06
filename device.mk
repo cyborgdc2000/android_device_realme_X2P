@@ -24,10 +24,6 @@ DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay \
     $(LOCAL_PATH)/overlay-lineage
 
-PRODUCT_ENFORCE_RRO_TARGETS := *
-PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += \
-    $(LOCAL_PATH)/overlay/packages/apps/Bluetooth
-
 # Permissions
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.audio.low_latency.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.audio.low_latency.xml \
@@ -105,9 +101,18 @@ PRODUCT_PACKAGES += \
     libqcomvisualizer \
     libqcomvoiceprocessing \
     libvolumelistener \
+    libbatterylistener \
+    libsndmonitor \
+    libspkrprot \
     tinymix \
     libtinycompress \
     libtinycompress.vendor
+
+PRODUCT_PACKAGES += \
+    android.hardware.audio@2.0.vendor \
+    android.hardware.audio.effect@2.0.vendor \
+    android.hardware.audio@5.0.vendor \
+    android.hardware.audio.effect@5.0.vendor \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
