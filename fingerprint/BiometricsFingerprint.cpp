@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#define LOG_TAG "android.hardware.biometrics.fingerprint@2.3-service.oppo_OP4A89"
-#define LOG_VERBOSE "android.hardware.biometrics.fingerprint@2.3-service.oppo_OP4A89"
+#define LOG_TAG "android.hardware.biometrics.fingerprint@2.3-service.RMX1931"
+#define LOG_VERBOSE "android.hardware.biometrics.fingerprint@2.3-service.RMX1931"
 
 #include <hardware/hardware.h>
 #include <hardware/fingerprint.h>

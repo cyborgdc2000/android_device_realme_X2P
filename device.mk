@@ -12,11 +12,8 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_p.mk)
 PRODUCT_COMPRESSED_APEX := false
 
 # Get non-open-source specific aspects
-$(call inherit-product-if-exists, vendor/oppo/sm8150-common/sm8150-common-vendor.mk)
-$(call inherit-product, vendor/oppo/OP4A89/OP4A89-vendor.mk)
-
-# Project ID Quota
-$(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
+$(call inherit-product-if-exists, vendor/realme/sm8150-common/sm8150-common-vendor.mk)
+$(call inherit-product, vendor/realme/RMX1931/RMX1931-vendor.mk)
 
 # Additional native libraries
 PRODUCT_COPY_FILES += \
@@ -25,7 +22,7 @@ PRODUCT_COPY_FILES += \
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay \
-    $(LOCAL_PATH)/overlay-arrow
+    $(LOCAL_PATH)/overlay-lineage
 
 PRODUCT_ENFORCE_RRO_TARGETS := *
 PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += \
@@ -81,10 +78,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     AntHalService-Soong \
     com.dsi.ant@1.0.vendor
-
-# AOSiP Device Settings
-PRODUCT_PACKAGES += \
-    DeviceSettings
 
 # Atrace
 PRODUCT_PACKAGES += \
@@ -267,7 +260,7 @@ PRODUCT_PACKAGES += \
 
 # Fingerprint
 PRODUCT_PACKAGES += \
-    android.hardware.biometrics.fingerprint@2.3-service.oppo_OP4A89 \
+    android.hardware.biometrics.fingerprint@2.3-service.RMX1931 \
     android.hardware.biometrics.fingerprint@2.3.vendor
 
 # For config.fs
@@ -451,10 +444,10 @@ PRODUCT_COPY_FILES += \
 
 # Sensors
 PRODUCT_PACKAGES += \
-    android.hardware.sensors@1.0-impl.oppo_OP4A89 \
+    android.hardware.sensors@1.0-impl.RMX1931 \
     android.hardware.sensors@1.0-service \
     android.frameworks.sensorservice@1.0.vendor \
-    als_correction_service.oppo_OP4A89 \
+    als_correction_service.RMX1931 \
     libsensorndkbridge
 
 PRODUCT_COPY_FILES += \
@@ -490,7 +483,7 @@ PRODUCT_PACKAGES += \
 
 # Touch
 PRODUCT_PACKAGES += \
-    vendor.lineage.touch@1.0-service.oppo_OP4A89
+    vendor.lineage.touch@1.0-service.RMX1931
 
 # USB
 PRODUCT_PACKAGES += \
@@ -498,7 +491,7 @@ PRODUCT_PACKAGES += \
 
 # Vibrator
 PRODUCT_PACKAGES += \
-    vendor.qti.hardware.vibrator.service.oppo_OP4A89
+    vendor.qti.hardware.vibrator.service.RMX1931
 
 PRODUCT_COPY_FILES += \
     vendor/qcom/opensource/vibrator/excluded-input-devices.xml:$(TARGET_COPY_OUT_VENDOR)/etc/excluded-input-devices.xml

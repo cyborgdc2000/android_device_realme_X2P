@@ -22,7 +22,7 @@
 
 #ifndef _BDROID_BUILDCFG_H
 #define _BDROID_BUILDCFG_H
-#define BTM_DEF_LOCAL_NAME   "OPPO Reno Ace"
+#define BTM_DEF_LOCAL_NAME   "Realme X2 Pro"
 
 // Disables read remote device feature
 #define BTM_WBS_INCLUDED TRUE

@@ -203,9 +203,9 @@ debug.stagefright.ccodec=1
 
 # Dolby
 ro.dolby.model=PAFM00
-ro.dolby.device=OP46C3
-ro.dolby.manufacturer=OPPO
-ro.dolby.brand=OPPO
+ro.dolby.device=RMX1931
+ro.dolby.manufacturer=realme
+ro.dolby.brand=realme
 
 # SoC
 ro.soc.manufacturer=Qualcomm

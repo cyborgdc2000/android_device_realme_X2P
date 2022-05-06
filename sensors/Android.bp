@@ -1,5 +1,5 @@
 cc_library_shared {
-    name: "android.hardware.sensors@1.0-impl.oppo_OP4A89",
+    name: "android.hardware.sensors@1.0-impl.RMX1931",
     defaults: ["hidl_defaults"],
     proprietary: true,
     relative_install_path: "hw",
@@ -27,7 +27,7 @@ cc_library_shared {
 }
 
 cc_binary {
-    name: "als_correction_service.oppo_OP4A89",
+    name: "als_correction_service.RMX1931",
     stem: "als_correction_service",
     init_rc: ["als_correction_service.rc"],
     srcs: [
