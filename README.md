@@ -9,7 +9,7 @@ It was announced & released in October 2019.
 
 Basic   | Spec Sheet
 -------:|:-------------------------
-SoC     | Qualcomm SDM855+ Snapdragon 855+
+SoC     | Qualcomm SM8150 Snapdragon 855+
 CPU     | Octa-Core (1x2.96 GHz Kryo 485 & 3x2.42 GHz Kryo 485 & 4x1.8 GHz Kryo 485)
 GPU     | Adreno 640
 Memory  | 6/8/12 GB RAM
