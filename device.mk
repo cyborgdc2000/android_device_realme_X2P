@@ -139,7 +139,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/audio_configs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_configs.xml \
     $(LOCAL_PATH)/audio/audio_configs_stock.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_configs_stock.xml \
     $(LOCAL_PATH)/audio/audio_effects.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.conf \
-    $(LOCAL_PATH)/configs/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
+    $(LOCAL_PATH)/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
     $(LOCAL_PATH)/audio/audio_io_policy.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_io_policy.conf \
     $(LOCAL_PATH)/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
     $(LOCAL_PATH)/audio/audio_policy_configuration_a2dp_offload_disabled.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/audio_policy_configuration_a2dp_offload_disabled.xml \
@@ -181,30 +181,49 @@ PRODUCT_PACKAGES += \
     vendor.qti.hardware.camera.postproc@1.0.vendor
 
 # Display
+# Display
 PRODUCT_PACKAGES += \
+    android.hardware.graphics.composer@2.4-service \
     android.hardware.graphics.mapper@3.0-impl-qti-display \
     android.hardware.graphics.mapper@4.0-impl-qti-display \
     android.hardware.memtrack@1.0-impl \
     android.hardware.memtrack@1.0-service \
-    disable_configstore \
     gralloc.msmnile \
+    hwcomposer.msmnile \
     libdisplayconfig.qti \
     libdisplayconfig.qti.vendor \
     libqdMetaData \
-    libsdmcore \
-    libsdmutils \
+    libqdMetaData.system \
     libtinyxml \
     libvulkan \
     memtrack.msmnile \
-    vendor.display.config@1.16.vendor \
+    vendor.display.config@1.0.vendor \
+    vendor.display.config@1.1.vendor \
+    vendor.display.config@1.2.vendor \
+    vendor.display.config@1.3.vendor \
+    vendor.display.config@1.4.vendor \
+    vendor.display.config@1.5.vendor \
+    vendor.display.config@1.6.vendor \
+    vendor.display.config@1.7.vendor \
+    vendor.display.config@1.8.vendor \
+    vendor.display.config@1.9.vendor \
+    vendor.display.config@2.0 \
     vendor.display.config@2.0.vendor \
     vendor.qti.hardware.display.allocator-service \
-    vendor.qti.hardware.display.composer-service \
     vendor.qti.hardware.display.mapper@1.0.vendor \
     vendor.qti.hardware.display.mapper@1.1.vendor \
     vendor.qti.hardware.display.mapper@2.0.vendor \
     vendor.qti.hardware.display.mapper@3.0.vendor \
-    vendor.qti.hardware.display.mapper@4.0.vendor
+    vendor.qti.hardware.display.mapper@4.0.vendor \
+    vendor.qti.hardware.display.composer@1.0.vendor \
+    vendor.qti.hardware.display.composer@2.0.vendor \
+
+PRODUCT_PACKAGES += \
+    vendor.qti.hardware.display.allocator@3.0 \
+    vendor.qti.hardware.display.mapper@1.0 \
+    vendor.qti.hardware.display.mapper@1.1 \
+    vendor.qti.hardware.display.mapper@3.0 \
+    vendor.qti.hardware.display.mapperextensions@1.0
 
 # DRM
 PRODUCT_PACKAGES += \
@@ -228,7 +247,14 @@ PRODUCT_BOOT_JARS += \
 
 # GPS
 PRODUCT_COPY_FILES += \
-    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/gps/,$(TARGET_COPY_OUT_VENDOR)/etc)
+    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/gps/,$(TARGET_COPY_OUT_VENDOR)/etc)
+
+# GPS
+PRODUCT_PACKAGES += \
+    libbatching \
+    libgeofencing \
+    libgnss \
+    libgnsspps \
 
 PRODUCT_PACKAGES += \
     android.hardware.gnss@2.1-impl-qti \
@@ -462,8 +488,8 @@ PRODUCT_PACKAGES += \
     libnl \
     libwfdaac_vendor
 
-PRODUCT_BOOT_JARS += \
-    WfdCommon
+#PRODUCT_BOOT_JARS += \
+#    WfdCommon
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/privapp-permissions-wfd.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-wfd.xml
