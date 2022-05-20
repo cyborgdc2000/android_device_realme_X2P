@@ -29,8 +29,8 @@
 #define PANEL_BLANK_PATH "/sys/kernel/oppo_display/notify_panel_blank"
 #define AOD_LIGHT_MODE_PATH "/sys/kernel/oppo_display/aod_light_mode_set"
 #define DIMLAYER_PATH "/sys/kernel/oppo_display/dimlayer_hbm"
-#define X_POS 569
-#define Y_POS 2393
+#define X_POS 540
+#define Y_POS 2156
 #define FP_SIZE 303
 #define ON 1
 #define OFF 0

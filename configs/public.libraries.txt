@@ -1,3 +1,5 @@
+libnpu.so
+libhta_hexagon_runtime.so
 libqti-perfd-client.so
 libadsprpc.so
 libcdsprpc.so
@@ -14,3 +16,6 @@ libAncHumBokeh.so
 libsnpe_loader.so
 libstblur_api.so
 libstdc++.so
+libAncHumVideoBase.so
+libmidasserviceintf.so
+libarcsoft_scbokeh_video.so

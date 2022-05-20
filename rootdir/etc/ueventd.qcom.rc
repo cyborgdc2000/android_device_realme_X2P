@@ -1,4 +1,4 @@
-# Copyright (c) 2012-2015, 2017-2020, The Linux Foundation. All rights reserved.
+# Copyright (c) 2012-2015, 2017-2019, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -32,7 +32,6 @@ firmware_directories /vendor/firmware_mnt/image/
 
 # the DIAG device node is not world writable/readable.
 /dev/diag                 0660   system     oem_2901
-/dev/mhi_*_pipe_4         0660   system     system
 
 /dev/genlock              0666   system     system
 /dev/wlan                 0660   wifi       wifi
@@ -146,8 +145,9 @@ firmware_directories /vendor/firmware_mnt/image/
 /dev/sec_nvm_*            0660   system     system
 /dev/cryptoapp            0660   system     system
 /dev/spdaemon_ssr         0660   system     system
-/dev/spu_hal_ssr          0660   system     system
-/dev/iuicc*               0660   system     system
+/dev/iuicc                0660   system     system
+/dev/iuicc0               0660   system     system
+/dev/iuicc1               0660   system     system
 /dev/gemini0              0660   system     camera
 /dev/jpeg0                0660   system     camera
 /dev/jpeg1                0660   system     camera
@@ -176,8 +176,9 @@ firmware_directories /vendor/firmware_mnt/image/
 /dev/wcnss_ctrl           0660   system     system
 /sys/devices/soc/a000000.qcom,wcnss-wlan/net/wlan0/queues/rx-* rps_cpus           0660   system     system
 /sys/devices/soc/a000000.qcom,wcnss-wlan/net/p2p0/queues/rx-* rps_cpus            0660   system     system
+/sys/devices/platform/soc/18800000.qcom,icnss/net/wlan*/queues/rx-* rps_cpus      0660   system     system
+/sys/devices/platform/soc/1c00000.qcom,pcie/pci0000:00/0000:00:00.0/0000:01:00.0/net/wlan*/queues/rx-* rps_cpus      0660   system     system
 /dev/spidev0.0            0660   system     audio
-/dev/i2c-7                0660   system     audio
 /dev/msm_camera/*         0660   system     camera
 /dev/gemini/              0660   system     camera
 /dev/mercury0             0660   system     camera
@@ -186,7 +187,6 @@ firmware_directories /vendor/firmware_mnt/image/
 /dev/msm_vidc_dec_sec     0660   system     audio
 /dev/msm_vidc_enc         0660   system     audio
 /dev/msm_rotator          0660   system     system
-/dev/hw_random            0600   root       root
 /dev/sdsprpc-smd          0660   system     system
 
 #permissions for audio
@@ -306,6 +306,8 @@ firmware_directories /vendor/firmware_mnt/image/
 /dev/nfc-nci              0660    nfc         nfc
 /dev/nq-nci               0660    nfc         nfc
 /dev/assd                 0660    nfc         nfc
+/dev/p73                  0660    secure_element         secure_element
+/dev/pn544                0660    nfc         nfc
 
 # UIO devices
 /dev/uio0                 0660   system     system
@@ -351,15 +353,12 @@ firmware_directories /vendor/firmware_mnt/image/
 /sys/class/leds/red      delay_on     0640    system    system
 /sys/class/leds/red      delay_off    0640    system    system
 /sys/class/leds/red      breath       0640    system    system
-/sys/class/leds/red      trigger      0640    system    system
 /sys/class/leds/green    delay_on     0640    system    system
 /sys/class/leds/green    delay_off    0640    system    system
 /sys/class/leds/green    breath       0640    system    system
-/sys/class/leds/green    trigger      0640    system    system
 /sys/class/leds/blue     delay_on     0640    system    system
 /sys/class/leds/blue     delay_off    0640    system    system
 /sys/class/leds/blue     breath       0640    system    system
-/sys/class/leds/blue     trigger      0640    system    system
 
 # NPU device
 /dev/msm_npu             0644   system     system

@@ -14,9 +14,9 @@
 # limitations under the License.
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/lineage_OP4A7A.mk
+    $(LOCAL_DIR)/lineage_RMX1931.mk
 
 COMMON_LUNCH_CHOICES := \
-    lineage_OP4A7A-user \
-    lineage_OP4A7A-userdebug \
-    lineage_OP4A7A-eng
+    lineage_RMX1931-user \
+    lineage_RMX1931-userdebug \
+    lineage_RMX1931-eng

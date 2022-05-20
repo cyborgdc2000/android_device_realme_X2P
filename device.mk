@@ -24,7 +24,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 $(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
 
 # Inherit proprietary libraries
-$(call inherit-product, vendor/oppo/OP4A7A/OP4A7A-vendor.mk)
+$(call inherit-product, vendor/realme/RMX1931/RMX1931-vendor.mk)
 
 # Properties
 TARGET_ODM_PROP += $(DEVICE_PATH)/odm.prop
@@ -93,7 +93,7 @@ PRODUCT_COPY_FILES += \
     vendor/lineage/config/permissions/vendor.lineage.biometrics.fingerprint.inscreen.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/vendor.lineage.biometrics.fingerprint.inscreen.xml
 
 # Shipping API level
-PRODUCT_SHIPPING_API_LEVEL := 29
+PRODUCT_SHIPPING_API_LEVEL := 28
 
 # Bootanimation
 TARGET_SCREEN_WIDTH := 1440
@@ -197,10 +197,6 @@ PRODUCT_PACKAGES += \
     vendor.qti.hardware.display.mapper@3.0.vendor \
     vendor.qti.hardware.display.mapper@4.0.vendor
 
-# Doze
-PRODUCT_PACKAGES += \
-    OPPODoze
-
 # DRM
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.3-service.clearkey
@@ -211,8 +207,8 @@ PRODUCT_PACKAGES += \
 
 # Fingerprint
 PRODUCT_PACKAGES += \
-    android.hardware.biometrics.fingerprint@2.1-service.oppo_OP4A7A \
-    vendor.lineage.biometrics.fingerprint.inscreen@1.0-service.oppo_OP4A7A
+    android.hardware.biometrics.fingerprint@2.1-service.RMX1931 \
+    vendor.lineage.biometrics.fingerprint.inscreen@1.0-service.RMX1931
 
 PRODUCT_PACKAGES += \
     IFAAService \
@@ -272,11 +268,11 @@ PRODUCT_COPY_FILES += \
 
 # Light
 PRODUCT_PACKAGES += \
-    android.hardware.light-service.oppo_OP4A7A
+    android.hardware.light-service.RMX1931
 
 # LiveDisplay
 PRODUCT_PACKAGES += \
-    vendor.lineage.livedisplay@2.1-service.oppo_OP4A7A
+    vendor.lineage.livedisplay@2.1-service.RMX1931
 
 # Media
 PRODUCT_COPY_FILES += \
@@ -322,7 +318,7 @@ PRODUCT_PACKAGES += \
 
 # Namespaces
 PRODUCT_SOONG_NAMESPACES += \
-    device/oppo/OP4A7A
+    device/realme/RMX1931
 
 # Native Public Libraries
 PRODUCT_COPY_FILES += \
@@ -427,7 +423,7 @@ PRODUCT_PACKAGES += \
 
 # Touch
 PRODUCT_PACKAGES += \
-    vendor.lineage.touch@1.0-service.oppo_OP4A7A
+    vendor.lineage.touch@1.0-service.RMX1931
 
 # USB
 PRODUCT_PACKAGES += \
@@ -446,7 +442,7 @@ PRODUCT_PACKAGES += \
 
 # Vibrator
 PRODUCT_PACKAGES += \
-    vendor.qti.hardware.vibrator.service.oppo_OP4A7A
+    vendor.qti.hardware.vibrator.service.RMX1931
 
 PRODUCT_COPY_FILES += \
     vendor/qcom/opensource/vibrator/excluded-input-devices.xml:$(TARGET_COPY_OUT_VENDOR)/etc/excluded-input-devices.xml
