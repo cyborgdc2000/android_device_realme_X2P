@@ -13,7 +13,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_p.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 
 # Get non-open-source specific aspects
-$(call inherit-product, vendor/realme/X2/X2-vendor.mk)
+$(call inherit-product, vendor/realme/RMX1931/RMX1931-vendor.mk)
 
 # VNDK
 PRODUCT_TARGET_VNDK_VERSION := 30
@@ -164,9 +164,9 @@ PRODUCT_PACKAGES += \
     android.hardware.memtrack@1.0-impl \
     android.hardware.memtrack@1.0-service \
     vendor.display.config@2.0 \
-    gralloc.sm6150 \
-    hwcomposer.sm6150 \
-    memtrack.sm6150 \
+    gralloc.msmnile \
+    hwcomposer.msmnile \
+    memtrack.msmnile \
     libdisplayconfig \
     libdisplayconfig.vendor \
     libdisplayconfig.qti \
@@ -195,7 +195,7 @@ PRODUCT_PACKAGES += \
 
 # Fingerprint
 PRODUCT_PACKAGES += \
-    android.hardware.biometrics.fingerprint@2.3-service.x2 \
+    android.hardware.biometrics.fingerprint@2.3-service.RMX1931 \
     vendor.oplus.hardware.biometrics.fingerprint@2.1
     
 # Framework detect
@@ -239,9 +239,9 @@ PRODUCT_PACKAGES += \
 
 # Privapp Whitelist
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/permissions/privapp-permissions-X2.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-X2.xml \
-    $(LOCAL_PATH)/configs/permissions/privapp-permissions-X2.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-X2.xml \
-    $(LOCAL_PATH)/configs/permissions/privapp-permissions-X2.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/privapp-permissions-X2.xml
+    $(LOCAL_PATH)/configs/permissions/privapp-permissions-RMX1931.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-RMX1931.xml \
+    $(LOCAL_PATH)/configs/permissions/privapp-permissions-RMX1931.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-RMX1931.xml \
+    $(LOCAL_PATH)/configs/permissions/privapp-permissions-RMX1931.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/privapp-permissions-RMX1931.xml
     
 # Hotword Enrollment
 PRODUCT_COPY_FILES += \
@@ -281,8 +281,8 @@ PRODUCT_PACKAGES += \
 
 # Lights
 PRODUCT_PACKAGES += \
-    android.hardware.light@2.0-service.x2 \
-    lights.sm6150
+    android.hardware.light@2.0-service.RMX1931 \
+    lights.msmnile
 
 # Media
 PRODUCT_PACKAGES += \
@@ -310,8 +310,8 @@ PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/media/vendor,$(TARGET_COPY_OUT_VENDOR)/etc)
 
 PRODUCT_COPY_FILES += \
-    hardware/qcom-caf/sm8150/media/conf_files/sm6150/mediacodec-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy \
-    hardware/qcom-caf/sm8150/media/conf_files/sm6150/system_properties.xml:$(TARGET_COPY_OUT_VENDOR)/etc/system_properties.xml
+    hardware/qcom-caf/sm8150/media/conf_files/msmnile/mediacodec-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy \
+    hardware/qcom-caf/sm8150/media/conf_files/msmnile/system_properties.xml:$(TARGET_COPY_OUT_VENDOR)/etc/system_properties.xml
 
 PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml \
@@ -352,7 +352,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.nfc.uicc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.uicc.xml
 
 # NFC namespaces
-PRODUCT_BOARD_PLATFORM := sm6150
+PRODUCT_BOARD_PLATFORM := msmnile
 PRODUCT_USES_QCOM_HARDWARE := true
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH) \
@@ -419,7 +419,7 @@ PRODUCT_PACKAGES += \
 
 # Sensors
 PRODUCT_PACKAGES += \
-    android.hardware.sensors@2.0-service.multihal_x2 \
+    android.hardware.sensors@2.0-service.multihal_RMX1931 \
     libsensorndkbridge
 
 PRODUCT_COPY_FILES += \
