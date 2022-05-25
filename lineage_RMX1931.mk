@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-$(call inherit-product, device/realme/X2/device.mk)
+$(call inherit-product, device/realme/RMX1931/device.mk)
 
 # Inherit some common Lineage stuff.
 $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
@@ -19,6 +19,10 @@ PRODUCT_MANUFACTURER := realme
 # Bootanimation Resolution
 TARGET_BOOT_ANIMATION_RES := 1080
 
-BUILD_FINGERPRINT := "realme/RMX1992/RMX1992L1:10/QKQ1.191201.002/1592194586:user/release-keys"
+BUILD_FINGERPRINT := "google/raven/raven:12/SP2A.220505.002/8353555:user/release-keys"
+
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    PRODUCT_NAME=RMX1931 \
+    PRIVATE_BUILD_DESC="RMX1931-user 11 RKQ1.200928.002 1625457120608 release-keys"
 
 PRODUCT_GMS_CLIENTID_BASE := android-oppo

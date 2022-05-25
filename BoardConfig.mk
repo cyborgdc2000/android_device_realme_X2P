@@ -5,7 +5,7 @@
 #
 
 BOARD_VENDOR := realme
-DEVICE_PATH := device/realme/X2
+DEVICE_PATH := device/realme/RMX1931
 
 # Display density
 TARGET_SCREEN_DENSITY := 480

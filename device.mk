@@ -188,10 +188,8 @@ PRODUCT_PACKAGES += \
     android.hardware.drm@1.3.vendor \
     android.hardware.drm@1.4-service.clearkey
     
-# Parts
-PRODUCT_PACKAGES += \
-    RealmeProximityHelper \
-    RealmeParts
+# RealmeParts
+$(call inherit-product, packages/apps/RealmeParts/parts.mk)
 
 # Fingerprint
 PRODUCT_PACKAGES += \

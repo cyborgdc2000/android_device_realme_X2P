@@ -25,15 +25,10 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-import /vendor/etc/init/hw/init.qti.ufs.rc
 import /vendor/etc/init/hw/init.qcom.usb.rc
-
+import /vendor/etc/init/hw/init.qcom.test.rc
 import /vendor/etc/init/hw/init.target.rc
 import /vendor/etc/init/hw/init.qcom.factory.rc
-#ifdef OPLUS_BUG_STABILITY
-#Kai.Huang@BSP.Kernel.Stability 2020/2/12  Case:04451596 solve the testPocCVE_2016_6753 fail 
-import /vendor/etc/init/hw/init.qcom.test.rc
-#endif
 #ifdef OPLUS_FEATURE_DISPLAY
 #su.duan@MULTIMEDIA.DISPLAY.FEATURE, 2020/08/17, Add for import init.oppo.display.rc
 import /vendor/etc/init/hw/init.oppo.display.rc
@@ -81,6 +76,9 @@ on early-init
     # Change ownership of sw_sync node
     chown system graphics /sys/kernel/debug/sync/sw_sync
     chmod 0666 /sys/kernel/debug/sync/sw_sync
+
+    #Disable UFS clock scaling
+    write /sys/bus/platform/devices/1d84000.ufshc/clkscale_enable 0
 
     chown root system /dev/kmsg
     chmod 0620 /dev/kmsg
@@ -179,9 +177,6 @@ on boot
     setprop wifi.interface wlan0
 
     setprop ro.telephony.call_ring.multiple false
-
-    #enable camera read sensors data
-    setprop persist.camera.gyro.disable 0
 
     #Remove SUID bit for iproute2 ip tool
     chmod 0755 /system/bin/ip
@@ -507,6 +502,8 @@ on property:persist.vendor.sys.rawdump_copy=0
 
 on property:sys.boot_completed=1
     write /dev/kmsg "Boot completed "
+    #Enable UFS clock scaling back
+    write /sys/bus/platform/devices/1d84000.ufshc/clkscale_enable 1
     #Reset read ahead for dm-0 and dm-1 to 512kb
     write /sys/block/dm-0/queue/read_ahead_kb 512
     write /sys/block/dm-1/queue/read_ahead_kb 512
@@ -826,14 +823,6 @@ service hostapd_fst /vendor/bin/hw/hostapd -dd -g /data/vendor/wifi/hostapd/glob
     disabled
     oneshot
 
-service ims_regmanager /system/vendor/bin/exe-ims-regmanagerprocessnative
-    class late_start
-    group net_bt_admin inet radio wifi
-    disabled
-
-on property:persist.ims.regmanager.mode=1
-    start ims_regmanager
-
 on property:ro.data.large_tcp_window_size=true
     # Adjust socket buffer to enlarge TCP receive window for high bandwidth (e.g. DO-RevB)
     write /proc/sys/net/ipv4/tcp_adv_win_scale  2
@@ -875,32 +864,6 @@ service vendor.ssr_diag /system/vendor/bin/ssr_diag
     user system
     group system
     disabled
-
-service hvdcp /system/bin/hvdcp
-    class core
-    user root
-    disabled
-
-on property:persist.usb.hvdcp.detect=true
-    start hvdcp
-
-on property:persist.usb.hvdcp.detect=false
-    stop hvdcp
-
-service charger_monitor /system/bin/charger_monitor
-    user root
-    group root
-    disabled
-
-service qbcharger /charger -m 1
-    disabled
-    oneshot
-
-on property:sys.qbcharger.enable=true
-    start qbcharger
-
-on property:sys.qbcharger.enable=false
-    stop qbcharger
 
 service diag_mdlog_start /system/vendor/bin/diag_mdlog
     class late_start
@@ -1127,6 +1090,75 @@ service wifitestdiag /odm/bin/wifi_diag
 on property:sys.usb.config=diag,adb && property:sys.usb.configfs=1
     start wifitestdiag
 #endif /* OPLUS_FEATURE_WIFI_FTM */
+#ifdef OPLUS_FEATURE_WIFI_FTM
+#Min.Yi@EXP.CN.WiFi.Hardware.1065227, 2017/12/28
+#Add for receive command from the PC tools
+service wifi_diag_stop /vendor/bin/wifistopftmtest
+    class late_start
+    user root
+    group root
+    disabled
+    oneshot
+
+on property:oppo.wifi.ftmstoptest=1
+     start wifi_diag_stop
+on property:oppo.wifi.ftmstoptest=0
+     stop wifi_diag_stop
+
+#endif /* VENDOR_EDIT */
+#ifdef VENDOR_EDIT
+#Min.Yi@PSW.CN.WiFi.Hardware.1065227, 2017/11/02
+#Add for : Wifi ftm from the engineer app
+service wifi_ftm /vendor/bin/wififtmtest
+    class late_start
+    user root
+    group root
+    disabled
+    oneshot
+on property:oppo.wifi.ftmtest=1
+     start wifi_ftm
+on property:oppo.wifi.ftmtest=0
+     stop wifi_ftm
+#endif /* VENDOR_EDIT */
+#ifdef VENDOR_EDIT
+#Qiulei@Connectivity.WiFi.Hardware.1065227, 2016/07/23
+#Add for : Wifi ftm
+service wififtm /vendor/bin/wififtm
+    class late_start
+    user root
+    group root
+    disabled
+    oneshot
+on property:oppo.wifi.ftm=1
+     start wififtm
+on property:oppo.wifi.ftm=0
+     stop wififtm
+#endif /* VENDOR_EDIT */
+#ifdef VENDOR_EDIT
+#Qiulei@PSW.CN.WiFi.Hardware.1065227, 2016/07/23
+#Add for : Wifi HW ftm
+service wifihwftm /vendor/bin/wifihwftm
+    class late_start
+    user root
+    group root vendor_qti_diag
+    disabled
+    oneshot
+on property:oppo.wifi.hwtest=1
+     start wifihwftm
+on property:oppo.wifi.hwtest=0
+     stop wifihwftm
+on property:vendor.wifi.hwtest=1
+     start wifihwftm
+on property:vendor.wifi.hwtest=0
+     stop wifihwftm
+
+service wifirfmodetest /system/bin/wifirftest
+    class main
+    socket wifirf stream 0660 system system
+    user root
+    oneshot
+    disabled
+#endif /* VENDOR_EDIT */
 #ifdef VENDOR_EDIT
 #Liuchen@CONNECTIVITY.WIFI.BASIC.HARDWARE.484186, 2020/10/17
 #Add for : Wifi BDF version
@@ -1136,3 +1168,11 @@ service WifibdfVersion /odm/bin/vendor.autochmod.sh "WifibdfVersion"
     group root
     oneshot
 #endif /* VENDOR_EDIT */
+
+
+#Yupeng.Shan@TECH.AD.Performance, 2020/03/17, for benchmark
+on property:sys.oplus.high.performance.spec=1
+    setprop vendor.display.enable_rotator_ui 1
+
+on property:sys.oplus.high.performance.spec=0
+    setprop vendor.display.enable_rotator_ui 0
